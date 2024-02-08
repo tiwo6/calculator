@@ -11,7 +11,7 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
-    return Number(x) / Number(y);
+    return Math.round(((Number(x) / Number(y)) + Number.EPSILON) * 100) / 100;
 }
 
 function operate(x, y, operator) {
@@ -23,55 +23,59 @@ function operate(x, y, operator) {
 
 const numbers = document.querySelector(".numbers");
 const operators = document.querySelector(".operators");
-const result = document.querySelector(".result");
+const display = document.querySelector(".display");
 const equals = document.querySelector(".equals");
 const clear = document.querySelector(".clear");
 
 let number = null;
 let input = [];
-let results = null;
+let result = null;
 
 numbers.addEventListener("click", function(e) {
     number == null ? number = e.target.textContent : 
     number += e.target.textContent;
-    result.textContent = number;
+    display.textContent = number;
 })
 
 operators.addEventListener("click", function(e) {
-    
-        console.log(input);
-
+    if (number != null) {
         input.push(number);
-        let operatore = e.target.textContent;
-        console.log(operatore);
-        input.push(operatore);    
-        
-        if (input.length >= 3) {
-            results = operate(input[0], input[2], input[1]);
-            input[0] = results;
-            input[1] = operatore;
-            input.pop();
-            input.pop();
-        }   
         number = null;
+    }
+    let operator = e.target.textContent;
+    input.push(operator);    
+        
+    if (input.length >= 3) {
+        result = operate(input[0], input[2], input[1]);
+        input[0] = result;
+        input[1] = operator;
+        input.pop();
+        input.pop();
+    }   
 
-        if (results != null) result.textContent = results;
-
+    if (result != null) result.textContent = result;
+    console.log(input);
  })
 
  equals.addEventListener("click", function() {
-    input.push(number);
-    results = operate(input[0], input[2], input[1]);
-    result.textContent = results;
-    input[0] = results;
-    input.pop();
-    input.pop();
-    console.log(input);
+    if (input.length == 1) {
+        display.textContent = input[0];
+    }
+    else {
+        input.push(number);
+        result = operate(input[0], input[2], input[1]);
+        display.textContent = result;
+        input[0] = result;
+        input.pop();
+        input.pop();
+        number = null;   
+    }
+
  })
 
 clear.addEventListener("click", function() {
     number = null;
     input = [];
-    results = null;
-    result.textContent = "";
+    result = null;
+    display.textContent = "";
 })
