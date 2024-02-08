@@ -21,21 +21,27 @@ function operate(x, y, operator) {
     if (operator == "/") return divide(x,y);
 }
 
-const numbers = document.querySelector(".numbers");
+const numbers = document.querySelectorAll(".number");
 const operators = document.querySelector(".operators");
 const display = document.querySelector(".display");
 const equals = document.querySelector(".equals");
 const clear = document.querySelector(".clear");
 
+console.log(numbers);
+
 let number = null;
 let input = [];
 let result = null;
 
-numbers.addEventListener("click", function(e) {
+const numbersArr = Array.from(numbers);
+
+numbers.forEach((element) => element.addEventListener("click", function(e) {
     number == null ? number = e.target.textContent : 
     number += e.target.textContent;
     display.textContent = number;
-})
+    console.log(input);
+}))
+
 
 operators.addEventListener("click", function(e) {
     if (number != null) {
@@ -70,6 +76,7 @@ operators.addEventListener("click", function(e) {
         input.pop();
         number = null;   
     }
+    console.log(input);
 
  })
 
