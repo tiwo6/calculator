@@ -12,6 +12,10 @@ body {
     background-color: white;
     display: flex;
     flex-direction: column;
+    padding: 10px;
+    border: solid;
+    border-color: green;
+    border-radius: 5px;
 }
 
 .display {
@@ -20,6 +24,10 @@ body {
     font-size: 28px;
     padding: 10px;
     text-align: right;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .container button {
@@ -31,6 +39,11 @@ body {
 .buttons {
     display: flex;
     flex-direction: row;
+}
+
+.equals {
+    font-weight: 900;
+    font-size: 20px;
 }
 
 .numbers, .operators {
