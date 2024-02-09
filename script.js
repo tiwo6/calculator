@@ -29,6 +29,7 @@ const equals = document.querySelector(".equals");
 const clear = document.querySelector(".clear");
 const float = document.querySelector(".float");
 const del = document.querySelector(".del");
+const procent = document.querySelector(".procent");
 
 let number = null;
 let input = [];
@@ -110,5 +111,12 @@ del.addEventListener("click", function() {
     if (number != null) {
         number = number.substring(0, number.length - 1);
         display.textContent = number;
+    }
+})
+
+procent.addEventListener("click", function() {
+    if (number != null) {
+        number = divide(number, 100);
+        display.textContent += "%";
     }
 })
